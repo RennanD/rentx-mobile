@@ -2,13 +2,14 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 
 import { RFValue } from 'react-native-responsive-fontsize';
-import { Container, Header, TotalCars } from './styles';
+import { Container, Header, TotalCars, CarList } from './styles';
 
 import Logo from '../../assets/logo.svg';
 import { Car } from '../../components/Car';
 
 export function Home(): JSX.Element {
   const car = {
+    id: String(1),
     brand: 'audi',
     name: 'RS 5 Coupé',
     rent: {
@@ -16,7 +17,7 @@ export function Home(): JSX.Element {
       price: 120,
     },
     thumbnail:
-      'https://lh3.googleusercontent.com/proxy/2zbUc1g5ojWGdKsdFUjGH8Ox_HlUeq6f36yfRVwnh8zYvFkZNC_gNFW9W9b2tXufzfB9iywo4rr3tS3EXEGioJ_xx8cLlLxiJzU_3dEl4Bzua2hAvxDthvvoQOzC',
+      'https://www.audicentersalvador.com.br/assets/uploads/nt_veiculos/34372-74981-imagem-topo-removebg-preview.png?v=1621743521',
   };
 
   return (
@@ -32,7 +33,11 @@ export function Home(): JSX.Element {
         <TotalCars>Total de 12 carros</TotalCars>
       </Header>
 
-      <Car car={car} />
+      <CarList
+        data={['1', '2', '3']}
+        keyExtractor={item => String(item)}
+        renderItem={() => <Car car={car} />}
+      />
     </Container>
   );
 }

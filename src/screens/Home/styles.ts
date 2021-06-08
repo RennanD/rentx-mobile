@@ -1,5 +1,7 @@
-import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import styled, { css } from 'styled-components/native';
+import { FlatList } from 'react-native';
+
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
   flex: 1;
@@ -27,3 +29,10 @@ export const TotalCars = styled.Text`
     color: ${theme.colors.text};
   `}
 `;
+
+export const CarList = styled(FlatList).attrs({
+  contentContainerStyle: {
+    padding: 24,
+  },
+  showsVerticalScrollIndicator: false,
+})``;
