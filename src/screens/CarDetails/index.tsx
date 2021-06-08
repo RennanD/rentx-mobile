@@ -18,6 +18,7 @@ import {
   Price,
   About,
   AcessoryList,
+  Footer,
 } from './styles';
 
 import SpeedIcon from '../../assets/speed.svg';
@@ -26,6 +27,7 @@ import ForceIcon from '../../assets/force.svg';
 import GasolineIcon from '../../assets/gasoline.svg';
 import ExchangeIcon from '../../assets/exchange.svg';
 import PeopleIcon from '../../assets/people.svg';
+import { Button } from '../../components/Button';
 
 export function CarDetails(): JSX.Element {
   const images = [
@@ -77,6 +79,9 @@ export function CarDetails(): JSX.Element {
           para quem gosta de acelerar.
         </About>
       </Content>
+      <Footer>
+        <Button>Confirmar</Button>
+      </Footer>
     </Container>
   );
 }
