@@ -18,9 +18,10 @@ import AppLoading from 'expo-app-loading';
 
 import { Home } from './src/screens/Home';
 import { CarDetails } from './src/screens/CarDetails';
+import { Scheduling } from './src/screens/Scheduling';
+import { SchedulingDetails } from './src/screens/SchedulingDetails';
 
 import theme from './src/styles/theme';
-import { Schedule } from './src/screens/Schedule';
 
 export default function App(): JSX.Element {
   const [fontsLoaded] = useFonts({
@@ -36,7 +37,7 @@ export default function App(): JSX.Element {
   }
   return (
     <ThemeProvider theme={theme}>
-      <Schedule />
+      <SchedulingDetails />
     </ThemeProvider>
   );
 }

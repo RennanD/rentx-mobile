@@ -21,7 +21,7 @@ import {
   Footer,
 } from './styles';
 
-export function Schedule(): JSX.Element {
+export function Scheduling(): JSX.Element {
   const theme = useTheme();
 
   return (

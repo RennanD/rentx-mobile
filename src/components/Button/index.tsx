@@ -15,7 +15,7 @@ export function Button({ children, color, ...rest }: ButtonProps): JSX.Element {
   const theme = useTheme();
 
   return (
-    <Container color={color || theme.colors.main}>
+    <Container color={color || theme.colors.main} {...rest}>
       <ButtonText>{children}</ButtonText>
     </Container>
   );
