@@ -22,6 +22,7 @@ import { Scheduling } from './src/screens/Scheduling';
 import { SchedulingDetails } from './src/screens/SchedulingDetails';
 
 import theme from './src/styles/theme';
+import { ScheduleConfirmation } from './src/screens/ScheduleConfirmation';
 
 export default function App(): JSX.Element {
   const [fontsLoaded] = useFonts({
@@ -37,7 +38,7 @@ export default function App(): JSX.Element {
   }
   return (
     <ThemeProvider theme={theme}>
-      <SchedulingDetails />
+      <ScheduleConfirmation />
     </ThemeProvider>
   );
 }
