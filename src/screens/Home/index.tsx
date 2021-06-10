@@ -1,5 +1,5 @@
-import React from 'react';
-import { StatusBar } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StatusBar, ActivityIndicator } from 'react-native';
 
 import { RFValue } from 'react-native-responsive-fontsize';
 
@@ -10,7 +10,26 @@ import { Container, Header, TotalCars, CarList } from './styles';
 import Logo from '../../assets/logo.svg';
 import { Car } from '../../components/Car';
 
+import api from '../../service/api';
+
+import { CarDTO } from '../../dtos/CarDTO';
+
 export function Home(): JSX.Element {
+  const [cars, setCars] = useState<CarDTO[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    try {
+      api.get('/cars').then(response => {
+        setCars(response.data);
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   const car = {
     id: String(1),
     brand: 'audi',
@@ -42,11 +61,15 @@ export function Home(): JSX.Element {
         <TotalCars>Total de 12 carros</TotalCars>
       </Header>
 
-      <CarList
-        data={['1', '2', '3']}
-        keyExtractor={item => String(item)}
-        renderItem={() => <Car car={car} onPress={handleNavigation} />}
-      />
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        <CarList
+          data={cars}
+          keyExtractor={item => item.id}
+          renderItem={() => <Car car={car} onPress={handleNavigation} />}
+        />
+      )}
     </Container>
   );
 }
