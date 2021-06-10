@@ -1,5 +1,8 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
+
+import { useNavigation } from '@react-navigation/native';
+
 import { Acessory } from '../../components/Acessory';
 import { BackButton } from '../../components/BackButton';
 import { ImagesSlider } from '../../components/ImagesSlider';
@@ -35,6 +38,12 @@ export function CarDetails(): JSX.Element {
     'https://storage.googleapis.com/golden-wind/ignite/react-native/images/2.png',
     'https://storage.googleapis.com/golden-wind/ignite/react-native/images/3.png',
   ];
+
+  const navigation = useNavigation();
+
+  function handleRentalConfirm() {
+    navigation.navigate('Scheduling');
+  }
 
   return (
     <Container>
@@ -80,7 +89,7 @@ export function CarDetails(): JSX.Element {
         </About>
       </Content>
       <Footer>
-        <Button>Confirmar</Button>
+        <Button onPress={handleRentalConfirm}>Escolhor perído do alugel</Button>
       </Footer>
     </Container>
   );

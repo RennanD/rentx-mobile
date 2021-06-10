@@ -5,19 +5,20 @@ export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.header};
 
-  padding-top: 96px;
+  padding-top: 26px;
 `;
 
 export const Content = styled.View`
   align-items: center;
   justify-content: center;
   align-items: center;
+  padding-bottom: 40px;
 `;
 
 export const Title = styled.Text`
   font-size: ${RFValue(30)}px;
 
-  margin-top: 40px;
+  margin-top: 30px;
 
   ${({ theme }) => css`
     color: ${theme.colors.shape};
@@ -43,5 +44,5 @@ export const Footer = styled.View`
   align-items: center;
   justify-content: center;
 
-  margin: 80px 0;
+  margin: 30px 0;
 `;

@@ -2,6 +2,9 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 
 import { RFValue } from 'react-native-responsive-fontsize';
+
+import { useNavigation } from '@react-navigation/native';
+
 import { Container, Header, TotalCars, CarList } from './styles';
 
 import Logo from '../../assets/logo.svg';
@@ -20,6 +23,12 @@ export function Home(): JSX.Element {
       'https://www.audicentersalvador.com.br/assets/uploads/nt_veiculos/34372-74981-imagem-topo-removebg-preview.png?v=1621743521',
   };
 
+  const navigation = useNavigation();
+
+  function handleNavigation() {
+    navigation.navigate('CarDetails');
+  }
+
   return (
     <Container>
       <StatusBar
@@ -36,7 +45,7 @@ export function Home(): JSX.Element {
       <CarList
         data={['1', '2', '3']}
         keyExtractor={item => String(item)}
-        renderItem={() => <Car car={car} />}
+        renderItem={() => <Car car={car} onPress={handleNavigation} />}
       />
     </Container>
   );

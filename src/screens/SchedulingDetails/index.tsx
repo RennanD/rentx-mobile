@@ -5,6 +5,8 @@ import { Feather } from '@expo/vector-icons';
 
 import { useTheme } from 'styled-components';
 
+import { useNavigation } from '@react-navigation/native';
+
 import { Acessory } from '../../components/Acessory';
 import { BackButton } from '../../components/BackButton';
 import { ImagesSlider } from '../../components/ImagesSlider';
@@ -51,6 +53,11 @@ export function SchedulingDetails(): JSX.Element {
   ];
 
   const theme = useTheme();
+  const navigation = useNavigation();
+
+  function handleConfirm() {
+    navigation.navigate('ScheduleConfirmation');
+  }
 
   return (
     <Container>
@@ -116,7 +123,9 @@ export function SchedulingDetails(): JSX.Element {
         </RentalPrice>
       </Content>
       <Footer>
-        <Button>Confirmar</Button>
+        <Button onPress={handleConfirm} color={theme.colors.success}>
+          Alugar agora
+        </Button>
       </Footer>
     </Container>
   );
