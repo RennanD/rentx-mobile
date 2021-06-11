@@ -16,19 +16,10 @@ import {
 } from './styles';
 
 import Gasoline from '../../assets/gasoline.svg';
-
-interface CardData {
-  brand: string;
-  name: string;
-  rent: {
-    period: string;
-    price: number;
-  };
-  thumbnail: string;
-}
+import { CarDTO } from '../../dtos/CarDTO';
 
 interface CarProps extends RectButtonProps {
-  car: CardData;
+  car: CarDTO;
 }
 
 export function Car({ car, ...rest }: CarProps): JSX.Element {

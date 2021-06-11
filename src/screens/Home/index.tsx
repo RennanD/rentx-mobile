@@ -8,7 +8,9 @@ import { useNavigation } from '@react-navigation/native';
 import { Container, Header, TotalCars, CarList } from './styles';
 
 import Logo from '../../assets/logo.svg';
+
 import { Car } from '../../components/Car';
+import { Loading } from '../../components/Loading';
 
 import api from '../../service/api';
 
@@ -30,18 +32,6 @@ export function Home(): JSX.Element {
     }
   }, []);
 
-  const car = {
-    id: String(1),
-    brand: 'audi',
-    name: 'RS 5 Coupé',
-    rent: {
-      period: 'ao dia',
-      price: 120,
-    },
-    thumbnail:
-      'https://www.audicentersalvador.com.br/assets/uploads/nt_veiculos/34372-74981-imagem-topo-removebg-preview.png?v=1621743521',
-  };
-
   const navigation = useNavigation();
 
   function handleNavigation() {
@@ -62,12 +52,14 @@ export function Home(): JSX.Element {
       </Header>
 
       {loading ? (
-        <ActivityIndicator />
+        <Loading />
       ) : (
         <CarList
           data={cars}
           keyExtractor={item => item.id}
-          renderItem={() => <Car car={car} onPress={handleNavigation} />}
+          renderItem={({ item: car }) => (
+            <Car car={car} onPress={handleNavigation} />
+          )}
         />
       )}
     </Container>
