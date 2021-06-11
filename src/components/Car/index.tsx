@@ -15,14 +15,17 @@ import {
   CarImage,
 } from './styles';
 
-import Gasoline from '../../assets/gasoline.svg';
 import { CarDTO } from '../../dtos/CarDTO';
+
+import { getAcessoryIcon } from '../../utils/getAcessoryIcon';
 
 interface CarProps extends RectButtonProps {
   car: CarDTO;
 }
 
 export function Car({ car, ...rest }: CarProps): JSX.Element {
+  const MotorIcon = getAcessoryIcon(car.fuel_type);
+
   return (
     <Container {...rest}>
       <Details>
@@ -34,7 +37,7 @@ export function Car({ car, ...rest }: CarProps): JSX.Element {
             <Price>R$ {car.rent.price}</Price>
           </Rent>
           <Type>
-            <Gasoline />
+            <MotorIcon />
           </Type>
         </About>
       </Details>
