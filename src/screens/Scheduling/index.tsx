@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { StatusBar } from 'react-native';
+import { Alert, StatusBar } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { useTheme } from 'styled-components';
 
@@ -23,6 +23,18 @@ import {
   Content,
   Footer,
 } from './styles';
+import { formatDate } from '../../utils/formatDate';
+import { CarDTO } from '../../dtos/CarDTO';
+
+interface RentalPeriod {
+  startDateFormatted: string;
+
+  endDateFormatted: string;
+}
+
+interface RouteProps {
+  car: CarDTO;
+}
 
 export function Scheduling(): JSX.Element {
   const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>(
@@ -32,8 +44,15 @@ export function Scheduling(): JSX.Element {
     {} as MarkedDateProps,
   );
 
+  const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>(
+    {} as RentalPeriod,
+  );
+
   const theme = useTheme();
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const { car } = route.params as RouteProps;
 
   function handleDateChange(date: DayProps) {
     let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
@@ -47,12 +66,27 @@ export function Scheduling(): JSX.Element {
     setLastSelectedDate(end);
 
     const interval = generateInterval(start, end);
-
     setMarkedDates(interval);
+
+    const firstDate = Object.keys(interval)[0];
+    const lastDate = Object.keys(interval)[Object.keys(interval).length - 1];
+
+    setRentalPeriod({
+      startDateFormatted: formatDate(firstDate),
+      endDateFormatted: formatDate(lastDate),
+    });
   }
 
   function handleConfirmSchedule() {
-    navigation.navigate('SchedulingDetails');
+    if (!rentalPeriod.startDateFormatted || !rentalPeriod.endDateFormatted) {
+      Alert.alert('Erro', 'Selecione um preíodo de locação');
+      return;
+    }
+
+    navigation.navigate('SchedulingDetails', {
+      car,
+      dates: Object.keys(markedDates),
+    });
   }
 
   return (
@@ -72,14 +106,18 @@ export function Scheduling(): JSX.Element {
         <RentalPeriod>
           <DateInfo>
             <DateTitle>DE </DateTitle>
-            <DateValue selected={false} />
+            <DateValue selected={!!rentalPeriod.startDateFormatted}>
+              {rentalPeriod.startDateFormatted}
+            </DateValue>
           </DateInfo>
 
           <ArrowIcon />
 
           <DateInfo>
             <DateTitle>ATÉ </DateTitle>
-            <DateValue selected={false} />
+            <DateValue selected={!!rentalPeriod.endDateFormatted}>
+              {rentalPeriod.endDateFormatted}
+            </DateValue>
           </DateInfo>
         </RentalPeriod>
       </Header>

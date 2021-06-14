@@ -62,7 +62,7 @@ export const DateValue = styled.Text<DateValueProps>`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.primary_500};
-    color: ${theme.colors.text};
+    color: ${theme.colors.shape};
   `}
 
   ${({ theme, selected }) =>
