@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar, ActivityIndicator } from 'react-native';
+import { StatusBar } from 'react-native';
 
 import { RFValue } from 'react-native-responsive-fontsize';
 
@@ -12,7 +12,7 @@ import Logo from '../../assets/logo.svg';
 import { Car } from '../../components/Car';
 import { Loading } from '../../components/Loading';
 
-import api from '../../service/api';
+import api from '../../services/api';
 
 import { CarDTO } from '../../dtos/CarDTO';
 

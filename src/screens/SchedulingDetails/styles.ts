@@ -91,7 +91,7 @@ export const Price = styled.Text`
   `}
 `;
 
-export const AcessoryList = styled.View`
+export const AccessoryList = styled.View`
   width: 100%;
 
   flex-direction: row;

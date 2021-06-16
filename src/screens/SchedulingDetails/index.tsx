@@ -5,9 +5,9 @@ import { Feather } from '@expo/vector-icons';
 
 import { useTheme } from 'styled-components';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-import { Acessory } from '../../components/Acessory';
+import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
 import { ImagesSlider } from '../../components/ImagesSlider';
 
@@ -23,7 +23,7 @@ import {
   Rent,
   Period,
   Price,
-  AcessoryList,
+  AccessoryList,
   Footer,
   RentalPeriod,
   CalendarIconView,
@@ -43,7 +43,14 @@ import ForceIcon from '../../assets/force.svg';
 import GasolineIcon from '../../assets/gasoline.svg';
 import ExchangeIcon from '../../assets/exchange.svg';
 import PeopleIcon from '../../assets/people.svg';
+
 import { Button } from '../../components/Button';
+
+import { CarDTO } from '../../dtos/CarDTO';
+
+interface RouteProps {
+  car: CarDTO;
+}
 
 export function SchedulingDetails(): JSX.Element {
   const images = [
@@ -54,6 +61,9 @@ export function SchedulingDetails(): JSX.Element {
 
   const theme = useTheme();
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const { car } = route.params as RouteProps;
 
   function handleConfirm() {
     navigation.navigate('ScheduleConfirmation');
@@ -87,14 +97,14 @@ export function SchedulingDetails(): JSX.Element {
           </Rent>
         </Details>
 
-        <AcessoryList>
-          <Acessory name="380Km/h" icon={SpeedIcon} />
-          <Acessory name="3.2s" icon={AccelerationIcon} />
-          <Acessory name="800 HP" icon={ForceIcon} />
-          <Acessory name="Gasolina" icon={GasolineIcon} />
-          <Acessory name="Automático" icon={ExchangeIcon} />
-          <Acessory name="2 pessoas" icon={PeopleIcon} />
-        </AcessoryList>
+        <AccessoryList>
+          <Accessory name="380Km/h" icon={SpeedIcon} />
+          <Accessory name="3.2s" icon={AccelerationIcon} />
+          <Accessory name="800 HP" icon={ForceIcon} />
+          <Accessory name="Gasolina" icon={GasolineIcon} />
+          <Accessory name="Automático" icon={ExchangeIcon} />
+          <Accessory name="2 pessoas" icon={PeopleIcon} />
+        </AccessoryList>
 
         <RentalPeriod>
           <CalendarIconView>

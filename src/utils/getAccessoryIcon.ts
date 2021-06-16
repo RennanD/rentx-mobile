@@ -14,7 +14,7 @@ import PeopleIcon from '../assets/people.svg';
 
 import CarSvg from '../assets/car.svg';
 
-export function getAcessoryIcon(icon: string): React.FC<SvgProps> {
+export function getAccessoryIcon(icon: string): React.FC<SvgProps> {
   switch (icon) {
     case 'speed':
       return SpeedIcon;

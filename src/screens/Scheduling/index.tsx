@@ -24,6 +24,7 @@ import {
   Footer,
 } from './styles';
 import { formatDate } from '../../utils/formatDate';
+
 import { CarDTO } from '../../dtos/CarDTO';
 
 interface RentalPeriod {

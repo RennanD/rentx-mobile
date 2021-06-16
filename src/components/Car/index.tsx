@@ -17,14 +17,14 @@ import {
 
 import { CarDTO } from '../../dtos/CarDTO';
 
-import { getAcessoryIcon } from '../../utils/getAcessoryIcon';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 
 interface CarProps extends RectButtonProps {
   car: CarDTO;
 }
 
 export function Car({ car, ...rest }: CarProps): JSX.Element {
-  const MotorIcon = getAcessoryIcon(car.fuel_type);
+  const MotorIcon = getAccessoryIcon(car.fuel_type);
 
   return (
     <Container {...rest}>

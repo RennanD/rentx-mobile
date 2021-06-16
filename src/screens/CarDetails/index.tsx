@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-import { Acessory } from '../../components/Acessory';
+import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
 import { ImagesSlider } from '../../components/ImagesSlider';
 
@@ -28,7 +28,7 @@ import { Button } from '../../components/Button';
 
 import { CarDTO } from '../../dtos/CarDTO';
 
-import { getAcessoryIcon } from '../../utils/getAcessoryIcon';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 
 interface RouteProps {
   car: CarDTO;
@@ -75,11 +75,11 @@ export function CarDetails(): JSX.Element {
         </Details>
 
         <AcessoryList>
-          {car.accessories.map(acessory => (
-            <Acessory
-              key={acessory.type}
-              name={acessory.name}
-              icon={getAcessoryIcon(acessory.type)}
+          {car.accessories.map(accessory => (
+            <Accessory
+              key={accessory.type}
+              name={accessory.name}
+              icon={getAccessoryIcon(accessory.type)}
             />
           ))}
         </AcessoryList>
