@@ -27,9 +27,8 @@ import { formatDate } from '../../utils/formatDate';
 
 import { CarDTO } from '../../dtos/CarDTO';
 
-interface RentalPeriod {
+export interface RentalPeriod {
   startDateFormatted: string;
-
   endDateFormatted: string;
 }
 

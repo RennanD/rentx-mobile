@@ -48,7 +48,9 @@ export function Home(): JSX.Element {
       <Header>
         <Logo width={RFValue(108)} height={RFValue(12)} />
 
-        <TotalCars>Total de 12 carros</TotalCars>
+        <TotalCars>
+          Total de {cars.length} carro{cars.length === 1 ? '' : 's'}
+        </TotalCars>
       </Header>
 
       {loading ? (
