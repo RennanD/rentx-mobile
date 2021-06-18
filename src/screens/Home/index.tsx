@@ -26,9 +26,9 @@ export function Home(): JSX.Element {
       api.get('/cars').then(response => {
         setCars(response.data);
       });
+      setLoading(false);
     } catch (error) {
       console.log(error);
-    } finally {
       setLoading(false);
     }
   }, []);

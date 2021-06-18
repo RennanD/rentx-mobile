@@ -78,6 +78,13 @@ export function SchedulingDetails(): JSX.Element {
       ...dates,
     };
 
+    api.post('schedules_byuser', {
+      user_id: 1,
+      car,
+      startDate: formatDate(dates[0]),
+      endDate: formatDate(dates[dates.length - 1]),
+    });
+
     api
       .put(`schedules_bycars/${car.id}`, {
         id: car.id,
