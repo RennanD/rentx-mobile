@@ -318,25 +318,85 @@
     },
     {
       "id": "49983f6c-a46a-4dfd-a86e-425b8c72e086",
-      "unavailable_dates": [
-        "2021-06-19",
-        "2021-06-20",
-        "2021-06-21"
-      ]
+      "unavailable_dates": {
+        "0": "2021-06-30",
+        "1": "2021-07-01",
+        "2": "2021-07-02",
+        "3": "2021-07-03",
+        "4": "2021-07-04",
+        "5": "2021-07-05",
+        "6": "2021-07-06",
+        "7": "2021-07-07",
+        "8": "2021-07-08",
+        "9": "2021-07-09",
+        "10": "2021-07-10",
+        "11": "2021-07-11",
+        "12": "2021-07-12",
+        "13": "2021-07-13",
+        "14": "2021-07-14",
+        "15": "2021-07-15",
+        "16": "2021-07-16",
+        "17": "2021-07-17",
+        "18": "2021-07-18",
+        "19": "2021-07-19",
+        "20": "2021-07-20",
+        "21": "2021-07-21",
+        "22": "2021-07-22",
+        "23": "2021-07-23",
+        "24": "2021-07-24",
+        "25": "2021-07-25",
+        "26": "2021-07-26",
+        "27": "2021-07-27",
+        "28": "2021-07-28",
+        "29": "2021-07-29",
+        "30": "2021-07-30",
+        "31": "2021-07-31",
+        "32": "2021-08-01",
+        "33": "2021-08-02",
+        "34": "2021-08-03",
+        "35": "2021-08-04",
+        "36": "2021-08-05",
+        "37": "2021-08-06",
+        "38": "2021-08-07",
+        "39": "2021-08-08",
+        "40": "2021-08-09",
+        "41": "2021-08-10",
+        "42": "2021-08-11",
+        "43": "2021-08-12",
+        "44": "2021-08-13",
+        "45": "2021-08-14",
+        "46": "2021-08-15",
+        "47": "2021-08-16",
+        "48": "2021-08-17",
+        "49": "2021-08-18",
+        "50": "2021-08-19",
+        "51": "2021-08-20",
+        "52": "2021-08-21",
+        "53": "2021-08-22",
+        "54": "2021-08-23",
+        "55": "2021-08-24",
+        "56": "2021-08-25",
+        "57": "2021-08-26",
+        "58": "2021-08-27",
+        "59": "2021-08-28",
+        "60": "2021-08-29",
+        "61": "2021-08-30",
+        "62": "2021-08-31"
+      }
     },
     {
       "id": "508e7193-0078-4615-9071-920b59038fda",
-      "unavailable_dates": [
-        "2021-06-01",
-        "2021-06-02",
-        "2021-06-03",
-        "2021-06-10",
-        "2021-06-11",
-        "2021-06-12",
-        "2021-06-17",
-        "2021-06-18",
-        "2021-06-19"
-      ]
+      "unavailable_dates": {
+        "0": "2021-07-01",
+        "1": "2021-07-02",
+        "2": "2021-07-03",
+        "3": "2021-07-04",
+        "4": "2021-07-05",
+        "5": "2021-07-06",
+        "6": "2021-07-07",
+        "7": "2021-07-08",
+        "8": "2021-07-09"
+      }
     },
     {
       "id": "59626707-88c5-4877-9350-07f372c0905a",
@@ -395,6 +455,153 @@
       "startDate": "01/07/2021",
       "endDate": "09/07/2021",
       "id": 1
+    },
+    {
+      "user_id": 1,
+      "car": {
+        "id": "508e7193-0078-4615-9071-920b59038fda",
+        "brand": "volvo",
+        "name": "XC40",
+        "about": "A Poderosa Combinação de um Motor Elétrico de Alto Desempenho e um Motor a Combustão. Compacto e Inovador. Com Design Expressivo, Tecnologias Intuitivas e Estilo Urbano.",
+        "rent": {
+          "period": "Ao dia",
+          "price": 120
+        },
+        "fuel_type": "gasoline_motor",
+        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
+        "accessories": [
+          {
+            "type": "speed",
+            "name": "180km/h"
+          },
+          {
+            "type": "acceleration",
+            "name": "1.5s"
+          },
+          {
+            "type": "turning_diameter",
+            "name": "600 HP"
+          },
+          {
+            "type": "gasoline_motor",
+            "name": "Gasolina"
+          },
+          {
+            "type": "exchange",
+            "name": "Auto"
+          },
+          {
+            "type": "seats",
+            "name": "5 pessoas"
+          }
+        ],
+        "photos": [
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/12.png",
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/13.png",
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/14.png"
+        ]
+      },
+      "startDate": "01/07/2021",
+      "endDate": "09/07/2021",
+      "id": 2
+    },
+    {
+      "user_id": 1,
+      "car": {
+        "id": "49983f6c-a46a-4dfd-a86e-425b8c72e086",
+        "brand": "Lamborghini",
+        "name": "Huracan",
+        "about": "Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar.",
+        "rent": {
+          "period": "Ao dia",
+          "price": 120
+        },
+        "fuel_type": "electric_motor",
+        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/4.png",
+        "accessories": [
+          {
+            "type": "speed",
+            "name": "380km/h"
+          },
+          {
+            "type": "acceleration",
+            "name": "3.2s"
+          },
+          {
+            "type": "turning_diameter",
+            "name": "800 HP"
+          },
+          {
+            "type": "electric_motor",
+            "name": "Elétrico"
+          },
+          {
+            "type": "exchange",
+            "name": "Auto"
+          },
+          {
+            "type": "seats",
+            "name": "2 pessoas"
+          }
+        ],
+        "photos": [
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/9.png",
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/10.png",
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/11.png"
+        ]
+      },
+      "startDate": "01/07/2021",
+      "endDate": "08/07/2021",
+      "id": 3
+    },
+    {
+      "user_id": 1,
+      "car": {
+        "id": "49983f6c-a46a-4dfd-a86e-425b8c72e086",
+        "brand": "Lamborghini",
+        "name": "Huracan",
+        "about": "Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar.",
+        "rent": {
+          "period": "Ao dia",
+          "price": 120
+        },
+        "fuel_type": "electric_motor",
+        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/4.png",
+        "accessories": [
+          {
+            "type": "speed",
+            "name": "380km/h"
+          },
+          {
+            "type": "acceleration",
+            "name": "3.2s"
+          },
+          {
+            "type": "turning_diameter",
+            "name": "800 HP"
+          },
+          {
+            "type": "electric_motor",
+            "name": "Elétrico"
+          },
+          {
+            "type": "exchange",
+            "name": "Auto"
+          },
+          {
+            "type": "seats",
+            "name": "2 pessoas"
+          }
+        ],
+        "photos": [
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/9.png",
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/10.png",
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/11.png"
+        ]
+      },
+      "startDate": "30/06/2021",
+      "endDate": "31/08/2021",
+      "id": 4
     }
   ]
 }

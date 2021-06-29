@@ -127,7 +127,12 @@ export function Scheduling(): JSX.Element {
       </Content>
 
       <Footer>
-        <Button onPress={handleConfirmSchedule}>Confirmar</Button>
+        <Button
+          enabled={!!rentalPeriod.endDateFormatted}
+          onPress={handleConfirmSchedule}
+        >
+          Confirmar
+        </Button>
       </Footer>
     </Container>
   );

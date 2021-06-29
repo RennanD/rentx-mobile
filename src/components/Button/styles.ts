@@ -23,6 +23,6 @@ export const ButtonText = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.secondary_500};
-    color: ${theme.colors.shape};
+    color: ${theme.colors.background_secondary};
   `}
 `;

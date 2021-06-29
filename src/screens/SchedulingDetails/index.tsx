@@ -61,6 +61,7 @@ export function SchedulingDetails(): JSX.Element {
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriodProps>(
     {} as RentalPeriodProps,
   );
+  const [loading, setLoading] = useState(false);
 
   const theme = useTheme();
   const navigation = useNavigation();
@@ -71,6 +72,8 @@ export function SchedulingDetails(): JSX.Element {
   const rentalTotalPrice = Number(dates.length * car.rent.price);
 
   async function handleConfirmSchedule() {
+    setLoading(true);
+
     const schedulesByCar = await api.get(`schedules_bycars/${car.id}`);
 
     const unavailable_dates = {
@@ -91,9 +94,10 @@ export function SchedulingDetails(): JSX.Element {
         unavailable_dates,
       })
       .then(() => navigation.navigate('ScheduleConfirmation'))
-      .catch(() =>
-        Alert.alert('Erro', 'Não foi possível carregar o agendamento'),
-      );
+      .catch(() => {
+        setLoading(false);
+        Alert.alert('Erro', 'Não foi possível carregar o agendamento');
+      });
   }
 
   useEffect(() => {
@@ -170,7 +174,12 @@ export function SchedulingDetails(): JSX.Element {
         </RentalPrice>
       </Content>
       <Footer>
-        <Button onPress={handleConfirmSchedule} color={theme.colors.success}>
+        <Button
+          enabled={!loading}
+          loading={loading}
+          onPress={handleConfirmSchedule}
+          color={theme.colors.success}
+        >
           Alugar agora
         </Button>
       </Footer>
