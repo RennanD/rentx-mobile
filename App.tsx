@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ThemeProvider } from 'styled-components';
 
@@ -20,8 +20,11 @@ import AppLoading from 'expo-app-loading';
 import { Routes } from './src/routes';
 
 import theme from './src/styles/theme';
+import { SplashScreen } from './src/components/SplashScreen';
 
 export default function App(): JSX.Element {
+  const [appLoagind, setApploading] = useState(true);
+
   const [fontsLoaded] = useFonts({
     Archivo_400Regular,
     Archivo_500Medium,
@@ -33,9 +36,10 @@ export default function App(): JSX.Element {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
+
   return (
     <ThemeProvider theme={theme}>
-      <Routes />
+      {appLoagind ? <SplashScreen /> : <Routes />}
     </ThemeProvider>
   );
 }
