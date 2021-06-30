@@ -33,13 +33,17 @@ export default function App(): JSX.Element {
     Inter_500Medium,
   });
 
+  function handleLoadApp() {
+    setApploading(false);
+  }
+
   if (!fontsLoaded) {
     return <AppLoading />;
   }
 
   return (
     <ThemeProvider theme={theme}>
-      {appLoagind ? <SplashScreen /> : <Routes />}
+      {appLoagind ? <SplashScreen onLoadApp={handleLoadApp} /> : <Routes />}
     </ThemeProvider>
   );
 }

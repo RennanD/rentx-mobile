@@ -1,43 +1,64 @@
-import React from 'react';
-import { StatusBar, StyleSheet, Dimensions } from 'react-native';
+import React, { useEffect } from 'react';
+import { StatusBar } from 'react-native';
+
+import { RFValue } from 'react-native-responsive-fontsize';
 
 import Animated, {
-  useSharedValue,
+  Extrapolate,
+  interpolate,
   useAnimatedStyle,
+  useSharedValue,
   withTiming,
-  Easing,
+  runOnJS,
 } from 'react-native-reanimated';
 
 import { Container } from './styles';
 
-import { Button } from '../Button';
+import BrandImage from '../../assets/brand.svg';
+import LogoImage from '../../assets/logo.svg';
 
-const WIDTH = Dimensions.get('window').width;
+interface SplashScrennProps {
+  onLoadApp: () => void;
+}
 
-const styles = StyleSheet.create({
-  box: {
-    height: 100,
-    width: 100,
-    backgroundColor: 'red',
-  },
-});
+export function SplashScreen({ onLoadApp }: SplashScrennProps): JSX.Element {
+  const splashAnimationValue = useSharedValue(0);
 
-export function SplashScreen(): JSX.Element {
-  const animation = useSharedValue(0);
-  const animatedStyles = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateX: withTiming(animation.value, {
-          duration: 500,
-          easing: Easing.ease,
-        }),
-      },
-    ],
+  const brandStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(
+      splashAnimationValue.value,
+      [0, 80],
+      [1, 0],
+      Extrapolate.CLAMP,
+    ),
   }));
 
-  function handleChangeAnimationPosition() {
-    animation.value = Math.random() * (WIDTH - 100);
+  const logoStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(
+      splashAnimationValue.value,
+      [120, 200],
+      [0, 1],
+      Extrapolate.CLAMP,
+    ),
+  }));
+
+  function startApp() {
+    onLoadApp();
   }
+
+  useEffect(() => {
+    splashAnimationValue.value = withTiming(
+      200,
+      {
+        duration: 2500,
+      },
+      () => {
+        'worklet';
+
+        runOnJS(startApp)();
+      },
+    );
+  }, []);
 
   return (
     <>
@@ -47,9 +68,13 @@ export function SplashScreen(): JSX.Element {
         barStyle="light-content"
       />
       <Container>
-        <Animated.View style={[styles.box, animatedStyles]} />
+        <Animated.View style={[brandStyle, { position: 'absolute' }]}>
+          <BrandImage width={RFValue(80)} height={RFValue(50)} />
+        </Animated.View>
 
-        <Button onPress={handleChangeAnimationPosition}>mover</Button>
+        <Animated.View style={[logoStyle, { position: 'absolute' }]}>
+          <LogoImage width={RFValue(180)} height={RFValue(50)} />
+        </Animated.View>
       </Container>
     </>
   );
