@@ -87,7 +87,7 @@ export function MyCars(): JSX.Element {
           <FlatList
             data={cars}
             keyExtractor={item => item.car.id}
-            showsVerticalScrollIndicator
+            showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <CarWrapper>
                 <Car car={item.car} />

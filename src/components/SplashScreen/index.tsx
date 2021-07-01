@@ -48,7 +48,7 @@ export function SplashScreen({ onLoadApp }: SplashScrennProps): JSX.Element {
 
   useEffect(() => {
     splashAnimationValue.value = withTiming(
-      200,
+      250,
       {
         duration: 2500,
       },
@@ -69,11 +69,11 @@ export function SplashScreen({ onLoadApp }: SplashScrennProps): JSX.Element {
       />
       <Container>
         <Animated.View style={[brandStyle, { position: 'absolute' }]}>
-          <BrandImage width={RFValue(80)} height={RFValue(50)} />
+          <BrandImage width={75} height={45} />
         </Animated.View>
 
         <Animated.View style={[logoStyle, { position: 'absolute' }]}>
-          <LogoImage width={RFValue(180)} height={RFValue(50)} />
+          <LogoImage width={180} height={50} />
         </Animated.View>
       </Container>
     </>
