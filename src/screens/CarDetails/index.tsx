@@ -1,6 +1,14 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
 
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
+
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { Accessory } from '../../components/Accessory';
@@ -11,7 +19,6 @@ import {
   Container,
   Header,
   CarImages,
-  Content,
   Details,
   Description,
   Brand,
@@ -35,6 +42,31 @@ interface RouteProps {
 }
 
 export function CarDetails(): JSX.Element {
+  const scrollInYAnimation = useSharedValue(0);
+
+  const animatedHeaderStyle = useAnimatedStyle(() => ({
+    height: interpolate(
+      scrollInYAnimation.value,
+      [0, 220],
+      [220, 85],
+      Extrapolate.CLAMP,
+    ),
+  }));
+
+  const slideCarsStyleAnimation = useAnimatedStyle(() => ({
+    opacity: interpolate(
+      scrollInYAnimation.value,
+      [0, 120],
+      [1, 0],
+      Extrapolate.CLAMP,
+    ),
+  }));
+
+  const scrollInYHandler = useAnimatedScrollHandler(event => {
+    scrollInYAnimation.value = event.contentOffset.y;
+    // console.log(event.contentOffset.y);
+  });
+
   const navigation = useNavigation();
   const route = useRoute();
 
@@ -53,15 +85,27 @@ export function CarDetails(): JSX.Element {
         backgroundColor="transparent"
         barStyle="dark-content"
       />
-      <Header>
-        <BackButton />
-      </Header>
 
-      <CarImages>
-        <ImagesSlider imagesUrl={car.photos} />
-      </CarImages>
+      <Animated.View style={[animatedHeaderStyle]}>
+        <Header>
+          <BackButton />
+        </Header>
 
-      <Content>
+        <Animated.View style={slideCarsStyleAnimation}>
+          <CarImages>
+            <ImagesSlider imagesUrl={car.photos} />
+          </CarImages>
+        </Animated.View>
+      </Animated.View>
+
+      <Animated.ScrollView
+        contentContainerStyle={{
+          paddingHorizontal: 24,
+        }}
+        showsVerticalScrollIndicator={false}
+        onScroll={scrollInYHandler}
+        scrollEventThrottle={16}
+      >
         <Details>
           <Description>
             <Brand>{car.brand}</Brand>
@@ -84,8 +128,13 @@ export function CarDetails(): JSX.Element {
           ))}
         </AcessoryList>
 
-        <About>{car.about}</About>
-      </Content>
+        <About>
+          {car.about}
+          {car.about}
+          {car.about}
+          {car.about}
+        </About>
+      </Animated.ScrollView>
       <Footer>
         <Button onPress={handleRentalConfirm}>Escolhor perído do alugel</Button>
       </Footer>
