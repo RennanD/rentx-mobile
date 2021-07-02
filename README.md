@@ -57,7 +57,7 @@ SDK's, following the documentation
 
 First, start our fake api:
 
-In `package.json` file `server` script, adding your machine ip in host flag.
+In file `package.json`  and script `server`, adding your machine ip in host flag.
 Example: `"server": "json-server ./src/services/server.json --host xxx.xxx.xx.x --port 3333 --delay 800"`
 
 Now in `src/services/api.ts`, do the same thing adding your machine ip in `baseURL`.
