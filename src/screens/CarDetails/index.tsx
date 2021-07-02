@@ -64,7 +64,6 @@ export function CarDetails(): JSX.Element {
 
   const scrollInYHandler = useAnimatedScrollHandler(event => {
     scrollInYAnimation.value = event.contentOffset.y;
-    // console.log(event.contentOffset.y);
   });
 
   const navigation = useNavigation();

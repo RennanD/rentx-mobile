@@ -29,7 +29,7 @@ export function ImagesSlider({ imagesUrl }: ImagesSliderProps): JSX.Element {
     <Container>
       <ImageIndexses>
         {imagesUrl.map((_, index) => (
-          <ImageIndex active={index === activeImageIndex} />
+          <ImageIndex key={String(index)} active={index === activeImageIndex} />
         ))}
       </ImageIndexses>
 
