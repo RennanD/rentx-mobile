@@ -151,5 +151,5 @@ npm run start
 
 
 <h1 align="center">
-  <img alt = "The app" src = "./.github/rentx.gif" width = "400px" />
+  <img alt = "The app" src = "./.github/rentx.gif" width = "300px" />
 </h1>
