@@ -18,9 +18,12 @@ interface InputPasswordProps extends TextInputProps {
 
 export function InputPassword({
   icon,
+  value,
   ...rest
 }: InputPasswordProps): JSX.Element {
   const [showPassword, setShowPassword] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const theme = useTheme();
 
@@ -28,18 +31,37 @@ export function InputPassword({
     setShowPassword(oldState => !oldState);
   }
 
+  function handleInputFocus() {
+    setIsFocused(true);
+  }
+
+  function handleInputBlur() {
+    setIsFocused(false);
+
+    if (value) {
+      setIsFilled(true);
+    }
+  }
+
   return (
-    <Container>
+    <Container focused={isFocused}>
       <IconContainer>
-        <Feather name={icon} size={24} color={theme.colors.text_detail} />
-      </IconContainer>
-      <Input secureTextEntry={!showPassword} {...rest} />
-      <ChangePasswordVisibilyButton onPress={handleChangePasswordVisibity}>
         <Feather
-          name={showPassword ? 'eye-off' : 'eye'}
+          name={icon}
           size={24}
-          color={theme.colors.text_detail}
+          color={
+            isFocused || isFilled ? theme.colors.main : theme.colors.text_detail
+          }
         />
+      </IconContainer>
+      <Input
+        secureTextEntry={!showPassword}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+        {...rest}
+      />
+      <ChangePasswordVisibilyButton onPress={handleChangePasswordVisibity}>
+        <Feather name={showPassword ? 'eye-off' : 'eye'} size={24} />
       </ChangePasswordVisibilyButton>
     </Container>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar, KeyboardAvoidingView, Keyboard } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useTheme } from 'styled-components';
@@ -9,6 +9,9 @@ import { InputText } from '../../components/Forms/InputText';
 import { Container, Header, Form, SubTitle, Title, Footer } from './styles';
 
 export function SingIn(): JSX.Element {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const theme = useTheme();
 
   function handleCloseKeyboard() {
@@ -33,13 +36,20 @@ export function SingIn(): JSX.Element {
 
           <Form>
             <InputText
+              value={email}
+              onChangeText={setEmail}
               autoCapitalize="none"
               autoCorrect={false}
               icon="mail"
               placeholder="E-mail"
               keyboardType="email-address"
             />
-            <InputPassword icon="lock" placeholder="Senha" />
+            <InputPassword
+              value={password}
+              onChangeText={setPassword}
+              icon="lock"
+              placeholder="Senha"
+            />
           </Form>
 
           <Footer>
