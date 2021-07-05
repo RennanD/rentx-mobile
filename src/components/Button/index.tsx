@@ -11,6 +11,7 @@ interface ButtonProps extends RectButtonProps {
   children: string;
   color?: string;
   loading?: boolean;
+  light?: boolean;
 }
 
 export function Button({
@@ -18,6 +19,7 @@ export function Button({
   color,
   loading,
   enabled = true,
+  light = false,
   ...rest
 }: ButtonProps): JSX.Element {
   const theme = useTheme();
@@ -37,7 +39,7 @@ export function Button({
           color={theme.colors.background_secondary}
         />
       ) : (
-        <ButtonText>{children}</ButtonText>
+        <ButtonText light={light}>{children}</ButtonText>
       )}
     </Container>
   );

@@ -1,0 +1,46 @@
+import React from 'react';
+import { StatusBar } from 'react-native';
+import { useTheme } from 'styled-components';
+import { Button } from '../../components/Button';
+import { InputPassword } from '../../components/Forms/InputPassword';
+import { InputText } from '../../components/Forms/InputText';
+
+import { Container, Header, Form, SubTitle, Title, Footer } from './styles';
+
+export function SingIn(): JSX.Element {
+  const theme = useTheme();
+
+  return (
+    <Container>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
+      <Header>
+        <Title>Estamos {'\n'}quase lá</Title>
+        <SubTitle>
+          Faça seu login para começar{'\n'}uma experiência incrível
+        </SubTitle>
+      </Header>
+
+      <Form>
+        <InputText
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="mail"
+          placeholder="E-mail"
+          keyboardType="email-address"
+        />
+        <InputPassword icon="lock" placeholder="Senha" />
+      </Form>
+
+      <Footer>
+        <Button enabled={false}>Login</Button>
+        <Button color={theme.colors.background_secondary} light>
+          Cirar conta gratuita
+        </Button>
+      </Footer>
+    </Container>
+  );
+}
