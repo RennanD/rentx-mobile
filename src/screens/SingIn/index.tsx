@@ -1,5 +1,6 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, KeyboardAvoidingView, Keyboard } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useTheme } from 'styled-components';
 import { Button } from '../../components/Button';
 import { InputPassword } from '../../components/Forms/InputPassword';
@@ -10,37 +11,45 @@ import { Container, Header, Form, SubTitle, Title, Footer } from './styles';
 export function SingIn(): JSX.Element {
   const theme = useTheme();
 
+  function handleCloseKeyboard() {
+    Keyboard.dismiss();
+  }
+
   return (
-    <Container>
-      <StatusBar
-        barStyle="dark-content"
-        translucent
-        backgroundColor="transparent"
-      />
-      <Header>
-        <Title>Estamos {'\n'}quase lá</Title>
-        <SubTitle>
-          Faça seu login para começar{'\n'}uma experiência incrível
-        </SubTitle>
-      </Header>
+    <KeyboardAvoidingView behavior="position" enabled>
+      <TouchableWithoutFeedback onPress={handleCloseKeyboard}>
+        <Container>
+          <StatusBar
+            barStyle="dark-content"
+            translucent
+            backgroundColor="transparent"
+          />
+          <Header>
+            <Title>Estamos {'\n'}quase lá</Title>
+            <SubTitle>
+              Faça seu login para começar{'\n'}uma experiência incrível
+            </SubTitle>
+          </Header>
 
-      <Form>
-        <InputText
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="mail"
-          placeholder="E-mail"
-          keyboardType="email-address"
-        />
-        <InputPassword icon="lock" placeholder="Senha" />
-      </Form>
+          <Form>
+            <InputText
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="mail"
+              placeholder="E-mail"
+              keyboardType="email-address"
+            />
+            <InputPassword icon="lock" placeholder="Senha" />
+          </Form>
 
-      <Footer>
-        <Button enabled={false}>Login</Button>
-        <Button color={theme.colors.background_secondary} light>
-          Cirar conta gratuita
-        </Button>
-      </Footer>
-    </Container>
+          <Footer>
+            <Button enabled={false}>Login</Button>
+            <Button color={theme.colors.background_secondary} light>
+              Cirar conta gratuita
+            </Button>
+          </Footer>
+        </Container>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
