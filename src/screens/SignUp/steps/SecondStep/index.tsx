@@ -4,11 +4,12 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
 } from 'react-native';
+import { useTheme } from 'styled-components';
 
 import { BackButton } from '../../../../components/BackButton';
 import { Bullet } from '../../../../components/Bullet';
 import { Button } from '../../../../components/Button';
-import { InputText } from '../../../../components/Forms/InputText';
+import { InputPassword } from '../../../../components/Forms/InputPassword';
 
 import {
   Container,
@@ -21,6 +22,8 @@ import {
 } from '../../styles';
 
 export function SecondStep(): JSX.Element {
+  const theme = useTheme();
+
   function handleCloseKeyboard() {
     Keyboard.dismiss();
   }
@@ -41,30 +44,14 @@ export function SecondStep(): JSX.Element {
           <SubTitle>Faça seu cadastro de{'\n'}forma rápida e fácil</SubTitle>
 
           <Form>
-            <FormStepTitle>1. Dados</FormStepTitle>
+            <FormStepTitle>2. Credenciais</FormStepTitle>
 
-            <InputText
-              icon="user"
-              placeholder="Nome"
-              autoCapitalize="words"
-              autoCorrect={false}
-            />
-            <InputText
-              icon="mail"
-              placeholder="E-mail"
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoCorrect={false}
-            />
-            <InputText
-              icon="credit-card"
-              placeholder="CNH"
-              autoCorrect={false}
-              keyboardType="numeric"
-            />
+            <InputPassword icon="lock" placeholder="Senha" />
+
+            <InputPassword icon="lock" placeholder="Confirmar senha" />
           </Form>
 
-          <Button>Próximo</Button>
+          <Button color={theme.colors.success}>Confirmar</Button>
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

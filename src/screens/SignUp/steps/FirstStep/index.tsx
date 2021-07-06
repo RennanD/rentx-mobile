@@ -5,10 +5,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-import { BackButton } from '../../../../components/BackButton';
-import { Bullet } from '../../../../components/Bullet';
-import { Button } from '../../../../components/Button';
-import { InputText } from '../../../../components/Forms/InputText';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   Container,
@@ -20,7 +17,18 @@ import {
   FormStepTitle,
 } from '../../styles';
 
+import { BackButton } from '../../../../components/BackButton';
+import { Bullet } from '../../../../components/Bullet';
+import { Button } from '../../../../components/Button';
+import { InputText } from '../../../../components/Forms/InputText';
+
 export function FirstStep(): JSX.Element {
+  const navigation = useNavigation();
+
+  function handleNextStep() {
+    navigation.navigate('SecondStep');
+  }
+
   function handleCloseKeyboard() {
     Keyboard.dismiss();
   }
@@ -32,8 +40,8 @@ export function FirstStep(): JSX.Element {
           <Header>
             <BackButton />
             <StepsContainer>
-              <Bullet />
               <Bullet active />
+              <Bullet />
             </StepsContainer>
           </Header>
 
@@ -64,7 +72,7 @@ export function FirstStep(): JSX.Element {
             />
           </Form>
 
-          <Button>Próximo</Button>
+          <Button onPress={handleNextStep}>Próximo</Button>
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
