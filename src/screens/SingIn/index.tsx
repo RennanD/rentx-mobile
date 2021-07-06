@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
-import { StatusBar, KeyboardAvoidingView, Keyboard } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import {
+  StatusBar,
+  KeyboardAvoidingView,
+  Keyboard,
+  TouchableWithoutFeedback,
+  Alert,
+} from 'react-native';
+
+import * as Yup from 'yup';
+
 import { useTheme } from 'styled-components';
+import { Container, Header, Form, SubTitle, Title, Footer } from './styles';
+
 import { Button } from '../../components/Button';
 import { InputPassword } from '../../components/Forms/InputPassword';
 import { InputText } from '../../components/Forms/InputText';
-
-import { Container, Header, Form, SubTitle, Title, Footer } from './styles';
 
 export function SingIn(): JSX.Element {
   const [email, setEmail] = useState('');
@@ -16,6 +24,26 @@ export function SingIn(): JSX.Element {
 
   function handleCloseKeyboard() {
     Keyboard.dismiss();
+  }
+
+  async function handleSignIn() {
+    const schema = Yup.object().shape({
+      email: Yup.string()
+        .email('Digite um email válido')
+        .required('E-mail obrigatório.'),
+      password: Yup.string().required('Senha obrigatória.'),
+    });
+
+    try {
+      await schema.validate({ email, password }, { abortEarly: false });
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert('Erro', error.message);
+        return;
+      }
+
+      Alert.alert('Erro', 'Tente novamente');
+    }
   }
 
   return (
@@ -53,7 +81,7 @@ export function SingIn(): JSX.Element {
           </Form>
 
           <Footer>
-            <Button enabled={false}>Login</Button>
+            <Button onPress={handleSignIn}>Login</Button>
             <Button color={theme.colors.background_secondary} light>
               Cirar conta gratuita
             </Button>

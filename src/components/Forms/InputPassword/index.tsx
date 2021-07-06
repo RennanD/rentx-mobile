@@ -61,7 +61,11 @@ export function InputPassword({
         {...rest}
       />
       <ChangePasswordVisibilyButton onPress={handleChangePasswordVisibity}>
-        <Feather name={showPassword ? 'eye-off' : 'eye'} size={24} />
+        <Feather
+          name={showPassword ? 'eye-off' : 'eye'}
+          size={24}
+          color={theme.colors.text_detail}
+        />
       </ChangePasswordVisibilyButton>
     </Container>
   );
