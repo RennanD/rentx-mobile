@@ -9,6 +9,8 @@ import {
 
 import * as Yup from 'yup';
 
+import { useNavigation } from '@react-navigation/native';
+
 import { useTheme } from 'styled-components';
 import { Container, Header, Form, SubTitle, Title, Footer } from './styles';
 
@@ -21,6 +23,7 @@ export function SingIn(): JSX.Element {
   const [password, setPassword] = useState('');
 
   const theme = useTheme();
+  const navigation = useNavigation();
 
   function handleCloseKeyboard() {
     Keyboard.dismiss();
@@ -44,6 +47,10 @@ export function SingIn(): JSX.Element {
 
       Alert.alert('Erro', 'Tente novamente');
     }
+  }
+
+  function handleAddNewAccount() {
+    navigation.navigate('SignUp');
   }
 
   return (
@@ -82,7 +89,11 @@ export function SingIn(): JSX.Element {
 
           <Footer>
             <Button onPress={handleSignIn}>Login</Button>
-            <Button color={theme.colors.background_secondary} light>
+            <Button
+              color={theme.colors.background_secondary}
+              light
+              onPress={handleAddNewAccount}
+            >
               Cirar conta gratuita
             </Button>
           </Footer>

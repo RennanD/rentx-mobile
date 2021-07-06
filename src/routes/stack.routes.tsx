@@ -9,6 +9,7 @@ import { Scheduling } from '../screens/Scheduling';
 import { SchedulingDetails } from '../screens/SchedulingDetails';
 import { ScheduleConfirmation } from '../screens/ScheduleConfirmation';
 import { SingIn } from '../screens/SingIn';
+import { FirstStep } from '../screens/SignUp/steps/FirstStep';
 
 const { Screen, Navigator } = createStackNavigator();
 
@@ -16,6 +17,7 @@ export function StackRoutes(): JSX.Element {
   return (
     <Navigator headerMode="none">
       <Screen name="SignIn" component={SingIn} />
+      <Screen name="SignUp" component={FirstStep} />
       <Screen name="Home" component={Home} />
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="MyCars" component={MyCars} />

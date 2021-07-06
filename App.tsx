@@ -22,7 +22,7 @@ import theme from './src/styles/theme';
 import { SplashScreen } from './src/components/SplashScreen';
 
 export default function App(): JSX.Element {
-  const [appLoagind, setApploading] = useState(false);
+  const [appLoagind, setApploading] = useState(true);
 
   const [fontsLoaded] = useFonts({
     Archivo_400Regular,
