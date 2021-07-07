@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
+  Alert,
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
 } from 'react-native';
 import { useTheme } from 'styled-components';
+
+import { useRoute } from '@react-navigation/native';
 
 import { BackButton } from '../../../../components/BackButton';
 import { Bullet } from '../../../../components/Bullet';
@@ -21,8 +24,36 @@ import {
   FormStepTitle,
 } from '../../styles';
 
+type RouteParams = {
+  user: {
+    name: string;
+    email: string;
+    driverLicense: string;
+  };
+};
+
 export function SecondStep(): JSX.Element {
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+
   const theme = useTheme();
+  const route = useRoute();
+
+  const { user } = route.params as RouteParams;
+
+  function handleRegister() {
+    if (!password) {
+      Alert.alert('Erro', 'Senha obrigatória');
+      return;
+    }
+
+    if (password !== passwordConfirmation) {
+      Alert.alert('Erro', 'As senhas não conferem');
+      return;
+    }
+
+    console.log('Deu certo');
+  }
 
   function handleCloseKeyboard() {
     Keyboard.dismiss();
@@ -46,12 +77,24 @@ export function SecondStep(): JSX.Element {
           <Form>
             <FormStepTitle>2. Credenciais</FormStepTitle>
 
-            <InputPassword icon="lock" placeholder="Senha" />
+            <InputPassword
+              value={password}
+              onChangeText={setPassword}
+              icon="lock"
+              placeholder="Senha"
+            />
 
-            <InputPassword icon="lock" placeholder="Confirmar senha" />
+            <InputPassword
+              value={passwordConfirmation}
+              onChangeText={setPasswordConfirmation}
+              icon="lock"
+              placeholder="Confirmar senha"
+            />
           </Form>
 
-          <Button color={theme.colors.success}>Confirmar</Button>
+          <Button onPress={handleRegister} color={theme.colors.success}>
+            Confirmar
+          </Button>
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

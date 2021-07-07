@@ -31,14 +31,16 @@ export function SingIn(): JSX.Element {
 
   async function handleSignIn() {
     const schema = Yup.object().shape({
+      password: Yup.string().required('Senha obrigatória.'),
       email: Yup.string()
         .email('Digite um email válido')
         .required('E-mail obrigatório.'),
-      password: Yup.string().required('Senha obrigatória.'),
     });
 
     try {
       await schema.validate({ email, password }, { abortEarly: false });
+
+      navigation.navigate('Home');
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert('Erro', error.message);

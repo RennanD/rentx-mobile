@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
+  Alert,
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
+
+import * as Yup from 'yup';
 
 import {
   Container,
@@ -23,10 +26,34 @@ import { Button } from '../../../../components/Button';
 import { InputText } from '../../../../components/Forms/InputText';
 
 export function FirstStep(): JSX.Element {
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [driverLicense, setDriverLicense] = useState('');
+
   const navigation = useNavigation();
 
-  function handleNextStep() {
-    navigation.navigate('SecondStep');
+  async function handleNextStep() {
+    try {
+      const schema = Yup.object().shape({
+        driverLicense: Yup.string().required('CNH obrigatório'),
+        email: Yup.string()
+          .email('E-mail inválido')
+          .required('E-mail obrigatório'),
+        name: Yup.string().required('Nome obrigatório'),
+      });
+
+      await schema.validate({ email, name, driverLicense });
+      navigation.navigate('SecondStep', {
+        user: { email, name, driverLicense },
+      });
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert('Erro', error.message);
+        return;
+      }
+
+      Alert.alert('Erro', 'Não foi possível realizar o cadastro');
+    }
   }
 
   function handleCloseKeyboard() {
@@ -52,12 +79,16 @@ export function FirstStep(): JSX.Element {
             <FormStepTitle>1. Dados</FormStepTitle>
 
             <InputText
+              value={name}
+              onChangeText={setName}
               icon="user"
               placeholder="Nome"
               autoCapitalize="words"
               autoCorrect={false}
             />
             <InputText
+              value={email}
+              onChangeText={setEmail}
               icon="mail"
               placeholder="E-mail"
               keyboardType="email-address"
@@ -65,6 +96,8 @@ export function FirstStep(): JSX.Element {
               autoCorrect={false}
             />
             <InputText
+              value={driverLicense}
+              onChangeText={setDriverLicense}
               icon="credit-card"
               placeholder="CNH"
               autoCorrect={false}
