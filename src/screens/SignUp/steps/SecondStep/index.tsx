@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { useTheme } from 'styled-components';
 
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { BackButton } from '../../../../components/BackButton';
 import { Bullet } from '../../../../components/Bullet';
@@ -37,6 +37,8 @@ export function SecondStep(): JSX.Element {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
   const theme = useTheme();
+
+  const navigation = useNavigation();
   const route = useRoute();
 
   const { user } = route.params as RouteParams;
@@ -52,7 +54,11 @@ export function SecondStep(): JSX.Element {
       return;
     }
 
-    console.log('Deu certo');
+    navigation.navigate('Confirmation', {
+      title: 'Conta Criada!',
+      subtitle: `Agora é só fazer login${'\n'}e aproveitar`,
+      nextRoute: 'SignIn',
+    });
   }
 
   function handleCloseKeyboard() {

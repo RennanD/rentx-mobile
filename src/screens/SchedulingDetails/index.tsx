@@ -93,7 +93,13 @@ export function SchedulingDetails(): JSX.Element {
         id: car.id,
         unavailable_dates,
       })
-      .then(() => navigation.navigate('ScheduleConfirmation'))
+      .then(() =>
+        navigation.navigate('Confirmation', {
+          title: 'Carro Alugado!',
+          subtitle: `Agora você só precisa ir${'\n'}até a concessionária da RENTX${'\n'}pegar o seu automóvel.`,
+          nextRoute: 'Home',
+        }),
+      )
       .catch(() => {
         setLoading(false);
         Alert.alert('Erro', 'Não foi possível carregar o agendamento');

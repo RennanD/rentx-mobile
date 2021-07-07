@@ -7,7 +7,7 @@ import { MyCars } from '../screens/MyCars';
 import { CarDetails } from '../screens/CarDetails';
 import { Scheduling } from '../screens/Scheduling';
 import { SchedulingDetails } from '../screens/SchedulingDetails';
-import { ScheduleConfirmation } from '../screens/ScheduleConfirmation';
+import { Confirmation } from '../screens/Confirmation';
 import { SingIn } from '../screens/SingIn';
 import { FirstStep } from '../screens/SignUp/steps/FirstStep';
 import { SecondStep } from '../screens/SignUp/steps/SecondStep';
@@ -25,7 +25,7 @@ export function StackRoutes(): JSX.Element {
       <Screen name="MyCars" component={MyCars} />
       <Screen name="Scheduling" component={Scheduling} />
       <Screen name="SchedulingDetails" component={SchedulingDetails} />
-      <Screen name="ScheduleConfirmation" component={ScheduleConfirmation} />
+      <Screen name="Confirmation" component={Confirmation} />
     </Navigator>
   );
 }
