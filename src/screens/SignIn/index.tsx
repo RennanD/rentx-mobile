@@ -18,12 +18,16 @@ import { Button } from '../../components/Button';
 import { InputPassword } from '../../components/Forms/InputPassword';
 import { InputText } from '../../components/Forms/InputText';
 
-export function SingIn(): JSX.Element {
+import { useAuth } from '../../hooks/auth';
+
+export function SignIn(): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const theme = useTheme();
   const navigation = useNavigation();
+
+  const { signIn } = useAuth();
 
   function handleCloseKeyboard() {
     Keyboard.dismiss();
@@ -40,7 +44,9 @@ export function SingIn(): JSX.Element {
     try {
       await schema.validate({ email, password }, { abortEarly: false });
 
-      navigation.navigate('Home');
+      await signIn({ email, password });
+
+      // navigation.navigate('Home');
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert('Erro', error.message);

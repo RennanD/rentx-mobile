@@ -8,7 +8,7 @@ import { CarDetails } from '../screens/CarDetails';
 import { Scheduling } from '../screens/Scheduling';
 import { SchedulingDetails } from '../screens/SchedulingDetails';
 import { Confirmation } from '../screens/Confirmation';
-import { SingIn } from '../screens/SingIn';
+import { SignIn } from '../screens/SignIn';
 import { FirstStep } from '../screens/SignUp/steps/FirstStep';
 import { SecondStep } from '../screens/SignUp/steps/SecondStep';
 
@@ -17,7 +17,7 @@ const { Screen, Navigator } = createStackNavigator();
 export function StackRoutes(): JSX.Element {
   return (
     <Navigator headerMode="none">
-      <Screen name="SignIn" component={SingIn} />
+      <Screen name="SignIn" component={SignIn} />
       <Screen name="SignUp" component={FirstStep} />
       <Screen name="SecondStep" component={SecondStep} />
       <Screen name="Home" component={Home} />

@@ -20,6 +20,7 @@ import { Routes } from './src/routes';
 
 import theme from './src/styles/theme';
 import { SplashScreen } from './src/components/SplashScreen';
+import { AppProvider } from './src/hooks';
 
 export default function App(): JSX.Element {
   const [appLoagind, setApploading] = useState(true);
@@ -41,8 +42,10 @@ export default function App(): JSX.Element {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      {appLoagind ? <SplashScreen onLoadApp={handleLoadApp} /> : <Routes />}
-    </ThemeProvider>
+    <AppProvider>
+      <ThemeProvider theme={theme}>
+        {appLoagind ? <SplashScreen onLoadApp={handleLoadApp} /> : <Routes />}
+      </ThemeProvider>
+    </AppProvider>
   );
 }
