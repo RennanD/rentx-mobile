@@ -23,6 +23,7 @@ import {
   Form,
   FormStepTitle,
 } from '../../styles';
+import api from '../../../../services/api';
 
 type RouteParams = {
   user: {
@@ -43,7 +44,9 @@ export function SecondStep(): JSX.Element {
 
   const { user } = route.params as RouteParams;
 
-  function handleRegister() {
+  async function handleRegister() {
+    const { name, email, driverLicense } = user;
+
     if (!password) {
       Alert.alert('Erro', 'Senha obrigatória');
       return;
@@ -54,11 +57,21 @@ export function SecondStep(): JSX.Element {
       return;
     }
 
-    navigation.navigate('Confirmation', {
-      title: 'Conta Criada!',
-      subtitle: `Agora é só fazer login${'\n'}e aproveitar`,
-      nextRoute: 'SignIn',
-    });
+    try {
+      await api.post('/users', {
+        name,
+        email,
+        driver_license: driverLicense,
+        password,
+      });
+      navigation.navigate('Confirmation', {
+        title: 'Conta Criada!',
+        subtitle: `Agora é só fazer login${'\n'}e aproveitar`,
+        nextRoute: 'SignIn',
+      });
+    } catch (error) {
+      Alert.alert('Ops 🙁', 'Não foi possível realizar o cadastro');
+    }
   }
 
   function handleCloseKeyboard() {
