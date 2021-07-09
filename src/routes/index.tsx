@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { useAuth } from '../hooks/auth';
 
-import { AppStackRoutes } from './app.stack.routes';
+import { AppTabsRoutes } from './app.tabs.routes';
 import { AuthRoutes } from './auth.routes';
 
 export function Routes(): JSX.Element {
@@ -10,7 +10,7 @@ export function Routes(): JSX.Element {
 
   return (
     <NavigationContainer>
-      {user ? <AppStackRoutes /> : <AuthRoutes />}
+      {user ? <AppTabsRoutes /> : <AuthRoutes />}
     </NavigationContainer>
   );
 }
