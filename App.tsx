@@ -42,10 +42,10 @@ export default function App(): JSX.Element {
   }
 
   return (
-    <AppProvider>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <AppProvider>
         {appLoagind ? <SplashScreen onLoadApp={handleLoadApp} /> : <Routes />}
-      </ThemeProvider>
-    </AppProvider>
+      </AppProvider>
+    </ThemeProvider>
   );
 }

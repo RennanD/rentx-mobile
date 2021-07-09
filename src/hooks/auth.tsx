@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+
 import api from '../services/api';
 
 interface User {
@@ -34,12 +35,19 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   const [authData, setAuthData] = useState<AuthState>({} as AuthState);
 
   async function handleSignIn({ email, password }: SignInCredentials) {
-    const response = await api.post('/sesstions', {
+    const response = await api.post('/sessions', {
       email,
       password,
     });
 
-    console.log(response.data);
+    const { token, user } = response.data;
+
+    api.defaults.headers.authorization = `Bearer ${token}`;
+
+    setAuthData({
+      token,
+      user,
+    });
   }
 
   return (

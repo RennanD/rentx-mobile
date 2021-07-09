@@ -46,13 +46,14 @@ export function SignIn(): JSX.Element {
 
       await signIn({ email, password });
 
-      // navigation.navigate('Home');
+      navigation.navigate('Home');
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert('Erro', error.message);
         return;
       }
 
+      console.log(error);
       Alert.alert('Erro', 'Tente novamente');
     }
   }

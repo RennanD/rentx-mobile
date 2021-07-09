@@ -92,7 +92,7 @@ export function CarDetails(): JSX.Element {
 
         <Animated.View style={slideCarsStyleAnimation}>
           <CarImages>
-            <ImagesSlider imagesUrl={car.photos} />
+            <ImagesSlider images={car.photos} />
           </CarImages>
         </Animated.View>
       </Animated.View>
@@ -112,15 +112,15 @@ export function CarDetails(): JSX.Element {
           </Description>
 
           <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>R$ {car.rent.price}</Price>
+            <Period>{car.period}</Period>
+            <Price>R$ {car.price}</Price>
           </Rent>
         </Details>
 
         <AcessoryList>
           {car.accessories.map(accessory => (
             <Accessory
-              key={accessory.type}
+              key={accessory.id}
               name={accessory.name}
               icon={getAccessoryIcon(accessory.type)}
             />

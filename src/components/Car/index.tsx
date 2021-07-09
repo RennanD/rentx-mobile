@@ -33,8 +33,8 @@ export function Car({ car, ...rest }: CarProps): JSX.Element {
         <CarName>{car.name}</CarName>
         <About>
           <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>R$ {car.rent.price}</Price>
+            <Period>{car.period}</Period>
+            <Price>R$ {car.price}</Price>
           </Rent>
           <Type>
             <MotorIcon />
