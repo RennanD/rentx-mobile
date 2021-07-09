@@ -15,7 +15,6 @@ import { Loading } from '../../components/Loading';
 import api from '../../services/api';
 
 import { CarDTO } from '../../dtos/CarDTO';
-import { FloatButton } from '../../components/FloatButton';
 
 export function Home(): JSX.Element {
   const [cars, setCars] = useState<CarDTO[]>([]);
@@ -28,7 +27,6 @@ export function Home(): JSX.Element {
         setLoading(false);
       });
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   }, []);
@@ -37,10 +35,6 @@ export function Home(): JSX.Element {
 
   function handleShowCarDetails(car: CarDTO) {
     navigation.navigate('CarDetails', { car });
-  }
-
-  function handlShowMyCars() {
-    navigation.navigate('MyCars');
   }
 
   return (
@@ -71,8 +65,6 @@ export function Home(): JSX.Element {
           )}
         />
       )}
-
-      <FloatButton onPress={handlShowMyCars} />
     </Container>
   );
 }

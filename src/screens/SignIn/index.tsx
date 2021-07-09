@@ -45,15 +45,12 @@ export function SignIn(): JSX.Element {
       await schema.validate({ email, password }, { abortEarly: false });
 
       await signIn({ email, password });
-
-      navigation.navigate('Home');
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert('Erro', error.message);
         return;
       }
 
-      console.log(error);
       Alert.alert('Erro', 'Tente novamente');
     }
   }
