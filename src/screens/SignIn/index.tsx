@@ -51,6 +51,8 @@ export function SignIn(): JSX.Element {
         return;
       }
 
+      // console.log(error);
+
       Alert.alert('Erro', 'Tente novamente');
     }
   }

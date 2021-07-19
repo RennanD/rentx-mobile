@@ -10,7 +10,7 @@ export function Routes(): JSX.Element {
 
   return (
     <NavigationContainer>
-      {user ? <AppTabsRoutes /> : <AuthRoutes />}
+      {user.id ? <AppTabsRoutes /> : <AuthRoutes />}
     </NavigationContainer>
   );
 }

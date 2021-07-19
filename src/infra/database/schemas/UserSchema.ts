@@ -8,11 +8,15 @@ const userSchema = tableSchema({
       type: 'string',
     },
     {
-      name: 'email',
+      name: 'name',
       type: 'string',
     },
     {
       name: 'email',
+      type: 'string',
+    },
+    {
+      name: 'avatar',
       type: 'string',
     },
     {
