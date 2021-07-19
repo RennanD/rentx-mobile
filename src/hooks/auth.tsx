@@ -61,7 +61,6 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         token,
       });
     } catch (error) {
-      console.log(error);
       throw new Error(error);
     }
   }
@@ -72,7 +71,11 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
 
       const response = await userCollection.query().fetch();
 
-      console.log('Usuário logado:', response);
+      if (response.length) {
+        const storagedUser = response[0]._raw as unknown as User;
+        setAuthData(storagedUser);
+        api.defaults.headers.authorization = `Bearer ${storagedUser.token}`;
+      }
     }
     loadStoragedUser();
   }, []);
