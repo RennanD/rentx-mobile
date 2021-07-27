@@ -8,6 +8,7 @@ import { useTheme } from 'styled-components';
 import {
   Container,
   Header,
+  BackButtonContainer,
   Title,
   Subtitle,
   Content,
@@ -51,8 +52,7 @@ export function MyCars(): JSX.Element {
         setCars(carsArray);
         setLoaading(false);
       })
-      .catch(error => {
-        console.log(error);
+      .catch(() => {
         setLoaading(false);
       });
   }, []);
@@ -65,7 +65,9 @@ export function MyCars(): JSX.Element {
         barStyle="light-content"
       />
       <Header>
-        <BackButton color={theme.colors.shape} />
+        <BackButtonContainer>
+          <BackButton color={theme.colors.shape} />
+        </BackButtonContainer>
 
         <Title>
           Seus agendamentos,{'\n'}

@@ -15,6 +15,7 @@ import { generateInterval } from '../../components/Calendar/generateInterval';
 import {
   Container,
   Header,
+  BackButtonContainer,
   Title,
   RentalPeriod,
   DateInfo,
@@ -97,7 +98,9 @@ export function Scheduling(): JSX.Element {
         barStyle="light-content"
       />
       <Header>
-        <BackButton color={theme.colors.shape} />
+        <BackButtonContainer>
+          <BackButton color={theme.colors.shape} />
+        </BackButtonContainer>
 
         <Title>
           Escolha uma {'\n'}data de início e {'\n'}fim do aluguel

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform } from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -7,6 +7,7 @@ import { useTheme } from 'styled-components';
 
 import { AppStackRoutes } from './app.stack.routes';
 import { MyCars } from '../screens/MyCars';
+import { Profile } from '../screens/Profile';
 
 import HomeIcon from '../assets/tab-icons/home.svg';
 import CarIcon from '../assets/tab-icons/car.svg';
@@ -50,7 +51,7 @@ export function AppTabsRoutes(): JSX.Element {
       />
       <Screen
         name="Profile"
-        component={View}
+        component={Profile}
         options={{
           tabBarIcon: ({ color }) => (
             <UserIcon height={24} width={24} fill={color} />

@@ -24,6 +24,11 @@ export const Header = styled.View`
   padding-top: ${getStatusBarHeight() + 30}px;
 `;
 
+export const BackButtonContainer = styled.View`
+  width: 100%;
+  align-items: flex-start;
+`;
+
 export const Title = styled.Text`
   font-size: ${RFValue(34)}px;
   margin-top: 24px;
