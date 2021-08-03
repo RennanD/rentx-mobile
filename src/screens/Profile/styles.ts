@@ -49,7 +49,7 @@ export const PhotoContainer = styled.View`
 
   background-color: ${({ theme }) => theme.colors.shape};
 
-  margin-top: 48px;
+  margin-top: 30px;
 
   position: relative;
 `;
@@ -80,7 +80,7 @@ export const PhotoChangeButton = styled(RectButton)`
 
 export const Content = styled.View`
   padding: 0 24px;
-  margin-top: 122px;
+  margin-top: 80px;
   padding-bottom: 20px;
 `;
 

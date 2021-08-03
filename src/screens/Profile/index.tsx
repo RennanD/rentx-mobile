@@ -8,6 +8,8 @@ import {
 
 import * as ImagePiker from 'expo-image-picker';
 
+import * as Yup from 'yup';
+
 import { Feather } from '@expo/vector-icons';
 
 import { useTheme } from 'styled-components';
@@ -33,16 +35,19 @@ import { InputText } from '../../components/Forms/InputText';
 import { InputPassword } from '../../components/Forms/InputPassword';
 
 import { useAuth } from '../../hooks/auth';
+import { Button } from '../../components/Button';
 
 type TabProps = 'userData' | 'passwordData';
 
 export function Profile(): JSX.Element {
-  const { user, signOut } = useAuth();
+  const { user, signOut, updateUser, updateAvatar } = useAuth();
 
   const [activeTab, setActiveTab] = useState<TabProps>('userData');
   const [avatar, setAvatar] = useState(user.avatar);
-  const [name] = useState(user.name);
-  const [driverLicense] = useState(user.driver_license);
+  const [name, setName] = useState(user.name);
+  const [driverLicense, setDriverLicense] = useState(user.driver_license);
+
+  const [loading, setLoading] = useState(false);
 
   const theme = useTheme();
 
@@ -62,6 +67,7 @@ export function Profile(): JSX.Element {
 
     if (result.uri) {
       setAvatar(result.uri);
+      await updateAvatar(user.id, result.uri);
     }
   }
 
@@ -77,6 +83,33 @@ export function Profile(): JSX.Element {
         style: 'default',
       },
     ]);
+  }
+
+  async function handleProfileUpdate() {
+    setLoading(true);
+    try {
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Nome obrigatório.'),
+        driverLicense: Yup.number().required('CNH obrigatória'),
+      });
+
+      await schema.validate({ name, driverLicense });
+
+      await updateUser({
+        ...user,
+        name,
+        driver_license: driverLicense,
+      });
+      setLoading(false);
+      Alert.alert('Oba!', 'Perfil atualizado com sucesso 🎉');
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert('Erro', error.message);
+      } else {
+        Alert.alert('Erro', 'Não foi possível atualizar o perfil');
+      }
+      setLoading(false);
+    }
   }
 
   return (
@@ -134,6 +167,8 @@ export function Profile(): JSX.Element {
               <Section>
                 <InputText
                   defaultValue={name}
+                  value={name}
+                  onChangeText={setName}
                   icon="user"
                   placeholder="Nome"
                   autoCorrect={false}
@@ -148,10 +183,16 @@ export function Profile(): JSX.Element {
 
                 <InputText
                   defaultValue={driverLicense}
+                  value={driverLicense}
+                  onChangeText={setDriverLicense}
                   icon="credit-card"
                   placeholder="CNH"
                   keyboardType="numeric"
                 />
+
+                <Button onPress={handleProfileUpdate} loading={loading}>
+                  Atualizar
+                </Button>
               </Section>
             ) : (
               <Section>

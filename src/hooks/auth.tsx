@@ -23,6 +23,8 @@ interface AuthContextData {
   user: User;
   signIn: (credentials: SignInCredentials) => Promise<void>;
   signOut: () => Promise<void>;
+  updateUser: (user: User) => Promise<void>;
+  updateAvatar: (id: string, avatar: string) => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -43,8 +45,9 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
 
       const { token, user } = response.data;
 
-      const userCollection = database.get<UserModel>('users');
       api.defaults.headers.authorization = `Bearer ${token}`;
+
+      const userCollection = database.get<UserModel>('users');
 
       await database.action(async () => {
         await userCollection.create(newUser => {
@@ -82,6 +85,40 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
     }
   }
 
+  async function handleUpdateUser(user: User) {
+    try {
+      const userCollection = database.get<UserModel>('users');
+      await database.action(async () => {
+        const userSelected = await userCollection.find(user.id);
+        await userSelected.update(userData => {
+          userData.name = user.name;
+          userData.driver_license = user.driver_license;
+          userData.name = user.name;
+        });
+      });
+
+      setAuthData(user);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async function handleUpdateAvatar(id: string, avatar: string) {
+    try {
+      const userCollection = database.get<UserModel>('users');
+      await database.action(async () => {
+        const userSelected = await userCollection.find(id);
+        await userSelected.update(userData => {
+          userData.avatar = avatar;
+        });
+      });
+
+      setAuthData(oldState => ({ ...oldState, avatar }));
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   useEffect(() => {
     async function loadStoragedUser() {
       const userCollection = database.get<UserModel>('users');
@@ -103,6 +140,8 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         user: authData,
         signIn: handleSignIn,
         signOut: handleSignOut,
+        updateUser: handleUpdateUser,
+        updateAvatar: handleUpdateAvatar,
       }}
     >
       {children}
