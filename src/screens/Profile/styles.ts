@@ -58,6 +58,7 @@ export const Photo = styled.Image`
   width: 180px;
   height: 180px;
   border-radius: 90px;
+  border: 2px ${({ theme }) => theme.colors.background_secondary};
 `;
 
 export const PhotoChangeButton = styled(RectButton)`

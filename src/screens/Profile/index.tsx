@@ -5,10 +5,12 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
+import * as ImagePiker from 'expo-image-picker';
+
 import { Feather } from '@expo/vector-icons';
 
 import { useTheme } from 'styled-components';
-import { BorderlessButton } from 'react-native-gesture-handler';
+
 import {
   Container,
   Header,
@@ -34,14 +36,32 @@ import { useAuth } from '../../hooks/auth';
 type TabProps = 'userData' | 'passwordData';
 
 export function Profile(): JSX.Element {
+  const { user } = useAuth();
+
   const [activeTab, setActiveTab] = useState<TabProps>('userData');
+  const [avatar, setAvatar] = useState(user.avatar);
+  const [name] = useState(user.name);
+  const [driverLicense] = useState(user.driver_license);
 
   const theme = useTheme();
 
-  const { user } = useAuth();
-
   function handleChangeActiveTab(activeTabOption: TabProps) {
     setActiveTab(activeTabOption);
+  }
+
+  async function handleSelectAvatar() {
+    const result = await ImagePiker.launchImageLibraryAsync({
+      mediaTypes: ImagePiker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+    });
+
+    if (result.cancelled) return;
+
+    if (result.uri) {
+      setAvatar(result.uri);
+    }
   }
 
   // function handleSignOut() {}
@@ -64,11 +84,13 @@ export function Profile(): JSX.Element {
             <PhotoContainer>
               <Photo
                 source={{
-                  uri: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+                  uri:
+                    avatar ||
+                    'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
                 }}
               />
 
-              <PhotoChangeButton>
+              <PhotoChangeButton onPress={handleSelectAvatar}>
                 <Feather name="camera" size={24} color={theme.colors.shape} />
               </PhotoChangeButton>
             </PhotoContainer>
@@ -80,11 +102,9 @@ export function Profile(): JSX.Element {
                 onPress={() => handleChangeActiveTab('userData')}
                 isActive={activeTab === 'userData'}
               >
-                <BorderlessButton>
-                  <OptionLabel isActive={activeTab === 'userData'}>
-                    Dados
-                  </OptionLabel>
-                </BorderlessButton>
+                <OptionLabel isActive={activeTab === 'userData'}>
+                  Dados
+                </OptionLabel>
               </Option>
 
               <Option
@@ -100,7 +120,7 @@ export function Profile(): JSX.Element {
             {activeTab === 'userData' ? (
               <Section>
                 <InputText
-                  defaultValue={user.name}
+                  defaultValue={name}
                   icon="user"
                   placeholder="Nome"
                   autoCorrect={false}
@@ -114,7 +134,7 @@ export function Profile(): JSX.Element {
                 />
 
                 <InputText
-                  defaultValue={user.driver_license}
+                  defaultValue={driverLicense}
                   icon="credit-card"
                   placeholder="CNH"
                   keyboardType="numeric"
