@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Alert,
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -36,7 +37,7 @@ import { useAuth } from '../../hooks/auth';
 type TabProps = 'userData' | 'passwordData';
 
 export function Profile(): JSX.Element {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
 
   const [activeTab, setActiveTab] = useState<TabProps>('userData');
   const [avatar, setAvatar] = useState(user.avatar);
@@ -64,7 +65,19 @@ export function Profile(): JSX.Element {
     }
   }
 
-  // function handleSignOut() {}
+  function handleSignOut() {
+    Alert.alert('Atenção', 'Deseja realmente sair da aplicação?', [
+      {
+        text: 'Cancelar',
+        style: 'destructive',
+      },
+      {
+        onPress: signOut,
+        text: 'Sim',
+        style: 'default',
+      },
+    ]);
+  }
 
   return (
     <KeyboardAvoidingView behavior="position" enabled>
@@ -76,7 +89,7 @@ export function Profile(): JSX.Element {
 
               <HeaderTitle>Editar Perfil</HeaderTitle>
 
-              <LogOutButton>
+              <LogOutButton onPress={handleSignOut}>
                 <Feather name="power" color={theme.colors.shape} size={24} />
               </LogOutButton>
             </HeaderTop>

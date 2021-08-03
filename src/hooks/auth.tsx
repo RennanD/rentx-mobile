@@ -22,6 +22,7 @@ interface SignInCredentials {
 interface AuthContextData {
   user: User;
   signIn: (credentials: SignInCredentials) => Promise<void>;
+  signOut: () => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -51,7 +52,7 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
           newUser.email = user.email;
           newUser.name = user.name;
           newUser.driver_license = user.driver_license;
-          newUser.avatar = user.avatar || 'png';
+          newUser.avatar = user.avatar;
           newUser.token = token;
         });
       });
@@ -60,6 +61,22 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         ...user,
         token,
       });
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async function handleSignOut() {
+    try {
+      const userCollection = database.get<UserModel>('users');
+
+      await database.action(async () => {
+        const userSelected = await userCollection.find(authData.id);
+
+        await userSelected.destroyPermanently();
+      });
+
+      setAuthData({} as User);
     } catch (error) {
       throw new Error(error);
     }
@@ -81,7 +98,13 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: authData, signIn: handleSignIn }}>
+    <AuthContext.Provider
+      value={{
+        user: authData,
+        signIn: handleSignIn,
+        signOut: handleSignOut,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
