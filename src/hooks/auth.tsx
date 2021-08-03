@@ -38,6 +38,7 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
 
   async function handleSignIn({ email, password }: SignInCredentials) {
     try {
+      let id_watermelon = '';
       const response = await api.post('/sessions', {
         email,
         password,
@@ -57,11 +58,14 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
           newUser.driver_license = user.driver_license;
           newUser.avatar = user.avatar;
           newUser.token = token;
+
+          id_watermelon = newUser.id;
         });
       });
 
       setAuthData({
         ...user,
+        id: id_watermelon,
         token,
       });
     } catch (error) {
