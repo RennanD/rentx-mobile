@@ -58,11 +58,12 @@ export function InputPassword({
         secureTextEntry={!showPassword}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
+        autoCorrect={false}
         {...rest}
       />
       <ChangePasswordVisibilyButton onPress={handleChangePasswordVisibity}>
         <Feather
-          name={showPassword ? 'eye-off' : 'eye'}
+          name={!showPassword ? 'eye-off' : 'eye'}
           size={24}
           color={theme.colors.text_detail}
         />

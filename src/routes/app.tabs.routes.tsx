@@ -29,6 +29,7 @@ export function AppTabsRoutes(): JSX.Element {
           height: 68,
           backgroundColor: theme.colors.background_primary,
         },
+        keyboardHidesTabBar: true,
       }}
     >
       <Screen
