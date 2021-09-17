@@ -4,6 +4,8 @@ import { StatusBar } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 import { useNavigation } from '@react-navigation/native';
+import { useNetInfo } from '@react-native-community/netinfo';
+import { synchronize } from '@nozbe/watermelondb/sync';
 
 import { Container, Header, TotalCars, CarList } from './styles';
 
@@ -13,12 +15,32 @@ import { Car } from '../../components/Car';
 import { Loading } from '../../components/Loading';
 
 import api from '../../services/api';
+import { database } from '../../infra/database';
 
 import { CarDTO } from '../../dtos/CarDTO';
 
 export function Home(): JSX.Element {
   const [cars, setCars] = useState<CarDTO[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const netInfo = useNetInfo();
+
+  async function offlineSyncronize() {
+    await synchronize({
+      database,
+      pullChanges: async ({ lastPulledAt }) => {
+        const { data } = await api.get(
+          `cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}`,
+        );
+        const { changes, latedtVersion } = data;
+
+        return { changes, timestamp: latedtVersion };
+      },
+      pushChanges: async ({ changes }) => {
+        console.log(changes);
+      },
+    });
+  }
 
   useEffect(() => {
     try {
@@ -30,6 +52,12 @@ export function Home(): JSX.Element {
       setLoading(false);
     }
   }, []);
+
+  // useEffect(() => {
+  //   if(netInfo.isConnected) {
+  //     Alert.
+  //   }
+  // },[netInfo.isConnected])
 
   const navigation = useNavigation();
 
