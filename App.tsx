@@ -1,3 +1,5 @@
+import { LogBox } from 'react-native';
+
 import React, { useState } from 'react';
 
 import { ThemeProvider } from 'styled-components';
@@ -21,6 +23,8 @@ import { Routes } from './src/routes';
 import theme from './src/styles/theme';
 import { SplashScreen } from './src/components/SplashScreen';
 import { AppProvider } from './src/hooks';
+
+LogBox.ignoreLogs(['Failed prop type: Invalid props.style key']);
 
 export default function App(): JSX.Element {
   const [appLoagind, setApploading] = useState(true);
