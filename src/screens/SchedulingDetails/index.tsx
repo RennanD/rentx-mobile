@@ -69,7 +69,7 @@ export function SchedulingDetails(): JSX.Element {
 
   const { car, dates } = route.params as RouteProps;
 
-  const rentalTotalPrice = Number(dates.length * car.rent.price);
+  const rentalTotalPrice = Number(dates.length * car.price);
 
   async function handleConfirmSchedule() {
     setLoading(true);
@@ -125,7 +125,7 @@ export function SchedulingDetails(): JSX.Element {
       </Header>
 
       <CarImages>
-        <ImagesSlider imagesUrl={car.photos} />
+        <ImagesSlider images={car.photos} />
       </CarImages>
 
       <Content>
@@ -136,8 +136,8 @@ export function SchedulingDetails(): JSX.Element {
           </Description>
 
           <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>R$ {car.rent.price}</Price>
+            <Period>{car.period}</Period>
+            <Price>R$ {car.price}</Price>
           </Rent>
         </Details>
 
@@ -173,7 +173,7 @@ export function SchedulingDetails(): JSX.Element {
           <RentalPriceLabel>TOTAL</RentalPriceLabel>
           <RentalPriceDetails>
             <RentalPriceQuota>
-              R$ {car.rent.price} X{dates.length} diárias
+              R$ {car.price} X{dates.length} diárias
             </RentalPriceQuota>
             <RentalPriceTotal>R$ {rentalTotalPrice}</RentalPriceTotal>
           </RentalPriceDetails>
